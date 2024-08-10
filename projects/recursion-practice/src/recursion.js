@@ -94,9 +94,10 @@ if (x < y){
   array.push(x + 1); 
   return range( x + 1, y, array);
   } else if(y < x){
-  array.unshift(y + 1); 
-  return range( x, y + 1, array);
+  array.push( x - 1); 
+  return range( x - 1, y, array);
   }
+  
 };
 
 // 7. Compute the exponent of a number.
@@ -125,7 +126,7 @@ var exponent = function(base, exp) {
 // powerOfTwo(10); // false
 var powerOfTwo = function(n) {
   //base
-  if( n <= 0){
+  if( n < 1){
     return false
   }
   if(n === 1){
@@ -136,21 +137,42 @@ var powerOfTwo = function(n) {
 };
 
 // 9. Write a function that accepts a string a reverses it.
-var reverse = function(string, reversed = '') {
+var reverse = function(string, reversed = '', i = string.length - 1 ){
   //base
-  if(string.length === 0){
+  if(i === -1){
     return reversed
   }
 
   //recursion
-  reversed += string[string.length - 1]
-  string
-  return reverse(string.pop(), reversed)
+  reversed += string[i]
+  i--
+  return reverse(string, reversed, i)
 };
 
 // 10. Write a function that determines if a string is a palindrome.
-var palindrome = function(string) {
-};
+var palindrome = function(string, i = 0, i2 = string.length - 1) {     
+  //base
+  if(string[i] === ' '){
+    return palindrome(string, i + 1, i2);
+  } 
+   if (string[i2] === ' '){
+    return palindrome(string, i, i2 - 1)
+  }
+  console.log(i2)
+  if(string[i].toUpperCase() != string[i2].toUpperCase() ){
+    return false
+  }
+  if (i2 === 0){
+    return true
+  } 
+
+  //recursion
+ 
+  if(string[i].toUpperCase() === string[i2].toUpperCase() && i2 != 0){
+    return palindrome(string, i + 1 , i2 - 1 );
+  }
+
+};;
 
 // 11. Write a function that returns the remainder of x divided by y without using the
 // modulo (%) operator.
@@ -163,8 +185,26 @@ var modulo = function(x, y) {
 // 12. Write a function that multiplies two numbers without using the * operator  or
 // JavaScript's Math object.
 // ATTENTION DO NOT LEAVE COMMENTS IN THIS FUNCTION. The test is looking for any ('/').
-var multiply = function(x, y) {
+var multiply = function(x, y, product = x ) {
+  if( product === 0 ){
+    return 0
+  } else if ( y - 1 === 0 ){
+    return product
+  } else if ( x - 1 === 0 ){
+    return y
+  } 
+
+  switch (x > 0 && y > 0) {
+    case true: 
+    return multiply( x, y - 1, product + x );
+    case false: switch
+
+
+  }
+    
+  return multiply( x, y - 1, product + x );
 };
+
 
 // 13. Write a function that divides two numbers without using the / operator  or
 // JavaScript's Math object.

@@ -172,7 +172,7 @@ var palindrome = function(string, i = 0, i2 = string.length - 1) {
     return palindrome(string, i + 1 , i2 - 1 );
   }
 
-};;
+};
 
 // 11. Write a function that returns the remainder of x divided by y without using the
 // modulo (%) operator.
@@ -186,26 +186,44 @@ var modulo = function(x, y) {
 // JavaScript's Math object.
 // ATTENTION DO NOT LEAVE COMMENTS IN THIS FUNCTION. The test is looking for any ('/').
 var multiply = function(x, y, product = x ) {
+
   if( product === 0 ){
     return 0
-  } else if ( y - 1 === 0 ){
+  } else if ( y - 1 === 0  ){
     return product
   } else if ( x - 1 === 0 ){
-    return y
-  } 
+      return y
+  } else if ( y + 1 === 0 ){
+    return -product
+  } else if ( x + 1 === 0 ){
+    return -y
+  }
+  let bothValues = (num1, num2) => {
+    if(num1 > 0 && num2 > 0){
+      return true
+    } else if( num1 < 0 && num2 < 0) {
+      return false
+    } else if(num1 > 0 && num2 < 0){
+      return "y is negative"
+    } else if(num1 < 0 && num2 > 0){
+      return "x is negative"
+    }
+  }
 
-  switch (x > 0 && y > 0) {
+  switch ( bothValues(x, y)) {
     case true: 
-    return multiply( x, y - 1, product + x );
-    case false: switch
-
-
+      return multiply( x, y - 1, product + x );
+    case false: 
+      return multiply(x, y + 1,product + x )
+    case "x is negative":
+      return multiply(x, y - 1, product + x ); 
+     case "y is negative":
+        return multiply(x, y + 1, product + x)         
   }
     
-  return multiply( x, y - 1, product + x );
 };
 
-
+/*
 // 13. Write a function that divides two numbers without using the / operator  or
 // JavaScript's Math object.
 var divide = function(x, y) {
@@ -374,7 +392,7 @@ var mergeSort = function(array) {
 };
 
 
-
+*/
 //-----------------------------------
 // DON'T REMOVE THIS CODE -----------
 //-----------------------------------

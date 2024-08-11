@@ -579,22 +579,112 @@ var augmentElements = function(array, aug) {
 // 33. Reduce a series of zeroes to a single 0.
 // minimizeZeroes([2,0,0,0,1,4]) // [2,0,1,4]
 // minimizeZeroes([2,0,0,0,1,0,0,4]) // [2,0,1,0,4]
-var minimizeZeroes = function(array) {
+//default an empty array, and an index of zero
+var minimizeZeroes = function(array, newArray = [], i = 0) {
+  //base
+  //if i is equal to the array length
+  if(i === array.length){
+    //return a new array
+    return newArray;
+  }
+  //recursion
+  //if the array at the current and next index is 0
+  if(array[i] === 0 && array[i - 1] === 0){
+    //return the function call, increment index by 1
+    return minimizeZeroes(array, newArray, i + 1)
+  }
+  //push the current value into the new array
+  newArray.push(array[i]);
+  //return the function, increase i by 1
+  return minimizeZeroes(array, newArray, i + 1)
 };
-/*
+
 // 34. Alternate the numbers in an array between positive and negative regardless of
 // their original sign.  The first number in the index always needs to be positive.
 // alternateSign([2,7,8,3,1,4]) // [2,-7,8,-3,1,-4]
 // alternateSign([-2,-7,8,3,-1,4]) // [2,-7,8,-3,1,-4]
-var alternateSign = function(array) {
+//default an empty array and an index to 0
+var alternateSign = function(array, altArr = [], i = 0) {
+  //initialize var x to absolute value of current array index
+  let x = Math.abs(array[i]);
+  //base
+  //if i equals the array length
+  if(i === array.length){
+    //return new array
+    return altArr
+  }
+  //recursion
+  //switch statement on remaindder of i / 2
+ switch (i % 2) {
+  //if o
+  case 0:
+    //push x into alt array
+  altArr.push(x)
+  //return the function with updated parameter
+    return alternateSign(array, altArr, i + 1)
+    //if 1
+  case 1:
+    //push negative x into the alternate array
+  altArr.push(-x)
+  //return the alternatesign function call with 1 added to index
+    return alternateSign(array, altArr, i + 1)
+ }
 };
 
 // 35. Given a string, return a string with digits converted to their word equivalent.
 // Assume all numbers are single digits (less than 10).
 // numToText("I have 5 dogs and 6 ponies"); // "I have five dogs and six ponies"
-var numToText = function(str) {
+//default parameters i to zero and newStr to an empty string
+var numToText = function(str, i = 0, newStr = "") {
+//base //if the index is equal to the length of the string
+if(i === str.length){
+  //return the new string
+  return newStr;
+}
+//recursion
+//switch statement takes in result of parseFloat on teh current index val of string. parsefloat converts a string to a number
+switch (parseFloat(str[i])){
+  //if the result is a number
+  case 0:
+    //add to the string the english transnlation of the corresponding number 
+    newStr += "zero";
+    //return a call of the same function, increase index by 1
+    return numToText(str, i + 1, newStr);
+  case 1:
+    newStr += "one";
+    return numToText(str, i + 1, newStr);
+  case 2:
+    newStr += "two";
+    return numToText(str, i + 1, newStr);
+  case 3:
+    newStr += "three";
+    return numToText(str, i + 1, newStr);
+  case 4:
+    newStr += "four";
+    return numToText(str, i + 1, newStr);
+  case 5:
+    newStr += "five";
+    return numToText(str, i + 1, newStr);
+  case 6:
+    newStr += "six";
+    return numToText(str, i + 1, newStr);
+  case 7:
+    newStr += "seven";
+    return numToText(str, i + 1, newStr);
+  case 8:
+    newStr += "eight";
+    return numToText(str, i + 1, newStr);
+  case 9:
+    newStr += "nine";
+    return numToText(str, i + 1, newStr);
+    //default statement triggers if no number was found
+ default: //add the value to the new string
+    newStr += str[i];
+    //return a call of the function with index increased by 1
+    return numToText(str, i + 1, newStr);
+}
 };
-
+/*
 // *** EXTRA CREDIT ***
 
 // 36. Return the number of times a tag occurs in the DOM.
